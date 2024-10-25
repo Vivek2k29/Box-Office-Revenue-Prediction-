@@ -1,0 +1,19 @@
+# Flask for web framework
+ Flask
+
+# Joblib for saving and loading models
+ joblib
+
+# Scikit-learn for machine learning models
+ scikit-learn
+
+# Pandas for data handling
+pandas
+
+# NumPy for numerical computations
+ numpy
+
+# (Optional) Matplotlib and Seaborn for plotting and visualizations
+seaborn
+
+matplotlib

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Box Office Revenue Prediction</title>
+    <script>
+        async function submitForm(event) {
+            event.preventDefault();
+
+            const formData = {
+                domestic_revenue: parseFloat(document.querySelector('input[name="domestic_revenue"]').value),
+                opening_revenue: parseFloat(document.querySelector('input[name="opening_revenue"]').value),
+                opening_theaters: parseInt(document.querySelector('input[name="opening_theaters"]').value),
+                budget: parseFloat(document.querySelector('input[name="budget"]').value),
+                release_days: parseInt(document.querySelector('input[name="release_days"]').value)
+            };
+
+            const response = await fetch('/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: new URLSearchParams(formData).toString() // Convert data to URL-encoded string
+            });
+
+            const result = await response.json();
+            alert('Predicted Global Revenue: ' + result.predicted_revenue);
+        }
+    </script>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+    background-image: url('../static/img4.jpg'); /* Add your background image here */
+    background-size: cover; /* Ensure the image covers the entire background */
+    background-position: center; /* Center the background image */
+}
+
+h1 {
+    text-align: center;
+    color: #fff; /* Change text color to white for better contrast */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Add a shadow for depth */
+    background-color: rgba(0, 0, 0, 0.5); /* Add a semi-transparent black background */
+    padding: 10px; /* Add padding to the heading for better readability */
+    border-radius: 5px; /* Optional: round the corners of the background */
+}
+
+form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff; /* Changed to blue */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+
+
+    </style>
+</head>
+<body>
+    <h1>Box Office Revenue Prediction</h1>
+    <form onsubmit="submitForm(event)">
+        <label for="domestic_revenue">Domestic Revenue ($):</label>
+        <input type="number" name="domestic_revenue" required><br>
+
+        <label for="opening_revenue">Opening Weekend Revenue ($):</label>
+        <input type="number" name="opening_revenue" required><br>
+
+        <label for="opening_theaters">Opening Theaters:</label>
+        <input type="number" name="opening_theaters" required><br>
+
+        <label for="budget">Production Budget ($):</label>
+        <input type="number" name="budget" required><br>
+
+        <label for="release_days">Release Days:</label>
+        <input type="number" name="release_days" required><br>
+
+        <button type="submit">Predict Global Revenue</button>
+    </form>
+</body>
+</html>
+
+
+
+
